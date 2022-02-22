@@ -7,7 +7,7 @@ INSTALL_PATH ?= /usr/bin
 SRC := rsu_client.c
 
 CFLAGS := -I../include/ -Wall -Wsign-compare -Wpedantic -Werror -Wfatal-errors
-LDFLAGS := -L../lib/ -lrsu -lz
+LDFLAGS := -L$(ZLIB_PATH) -L../lib/ -lrsu -lz
 
 all: rsu_client
 

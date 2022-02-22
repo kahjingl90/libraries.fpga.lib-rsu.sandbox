@@ -1483,6 +1483,13 @@ static int partition_create(char *name, __u64 start, unsigned int size)
 		return -1;
 	}
 
+    /* added maximum partition size check for MBR implementation
+    since RSU now reside only in A2 partition, not whole QSPI */
+	if (end >= dev_info.size) {
+		librsu_log(LOW, __func__, "error: Partition oversize A2 partition");
+		return -1;
+	}
+
 	if (strnlen(name, sizeof(spt.partition[0].name)) >=
 	    sizeof(spt.partition[0].name)) {
 		librsu_log(LOW, __func__,
